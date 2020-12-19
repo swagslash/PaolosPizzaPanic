@@ -14,7 +14,7 @@ public class Stopwatch : MonoBehaviour
 
     public void Start()
     {
-        StopWatchStart();
+        // StopWatchStart();
     }
 
     public void OnDestroy()
