@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6336730756052344604}
   - component: {fileID: 6944353373961703609}
   - component: {fileID: 5168931500369192051}
+  - component: {fileID: 8150203868462260726}
   m_Layer: 0
   m_Name: ConstructionBarrier
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &8150203868462260726
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682013224880735654}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1263536622879854172, guid: a14f8483d3744e345a569d9771cdd768, type: 3}
