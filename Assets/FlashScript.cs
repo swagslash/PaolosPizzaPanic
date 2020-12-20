@@ -7,6 +7,7 @@ public class FlashScript : MonoBehaviour
     public float TotalSeconds;
     public float MaxIntensity;
     public float InitialDelay;
+    public float CycleTime = 3;
     private Light _light;
     private float _waitTime;
     private bool _flash;
@@ -14,7 +15,6 @@ public class FlashScript : MonoBehaviour
     void Start()
     {
         _light = GetComponent<Light>();
-        _waitTime = TotalSeconds / 2;
 
         Invoke(nameof(FlashDelayed), InitialDelay);
     }
@@ -35,6 +35,8 @@ public class FlashScript : MonoBehaviour
 
     public IEnumerator Flash()
     {
+        _waitTime = TotalSeconds / 2;
+        
         while (_light.intensity < MaxIntensity)
         {
             _light.intensity += Time.deltaTime / _waitTime;
@@ -47,7 +49,7 @@ public class FlashScript : MonoBehaviour
             yield return null;
         }
         
-        Invoke(nameof(FlashDelayed), 3);
+        Invoke(nameof(FlashDelayed), CycleTime);
 
         yield return null;
     }
