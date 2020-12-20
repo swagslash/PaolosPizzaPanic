@@ -1,37 +1,50 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Quest : MonoBehaviour
 {
-    public List<Transform> goalLocations;
-    public List<string> goalNames;
+    private List<Transform> goalLocations;
     
-    private List<Goal> instantiatedGoals;
+    // not used in GUI, ignore for now
+    public List<string> goalNames;
+
+    public TextMeshProUGUI goalText;
+    
+    public TextMeshProUGUI bestScoreText;
+
+    private float bestTime; 
     
     public Goal goalPrefab;
     // Start is called before the first frame update
     void Start()
     {
-        this.goalLocations.Add(this.transform);
-        instantiatedGoals = new List<Goal>();
+        bestTime = Single.PositiveInfinity;
+        goalLocations = new List<Transform>();
+        foreach (var componentInChild in GetComponentsInChildren<Transform>())
+        {
+            if(componentInChild.position == this.transform.position) continue;
+            goalLocations.Add(componentInChild);
+            goalNames.Add(componentInChild.name);
+        }
     }
 
     public List<Goal> ActivateQuest(Stopwatch stopwatchComponent)
     {
+        List<Goal> instantiatedGoals = new List<Goal>();
+        stopwatchComponent.StopWatchReset();
         stopwatchComponent.StopWatchStart();
-        foreach (var t in goalLocations)
+        for (var index = 0; index < goalLocations.Count; index++)
         {
+            var t = goalLocations[index];
             var goal = Instantiate(goalPrefab, t.position, Quaternion.identity);
+            goal.name = goalNames[index];
             instantiatedGoals.Add(goal);
-        }
-        for (var i = 0; i < instantiatedGoals.Count - 1; i++)
-        {
-            instantiatedGoals[i].nextGoal = instantiatedGoals[i + 1];
         }
 
         DisableQuest(); // so we can only do it once
-        
         return new List<Goal>(instantiatedGoals);
     }
 
@@ -41,9 +54,21 @@ public class Quest : MonoBehaviour
         this.GetComponent<Collider>().enabled = false;
         this.GetComponent<MeshRenderer>().enabled = false;
     }
-
-    public void Complete()
+    
+    void EnableQuest()
     {
-        Debug.Log("Completed quest");
+        this.GetComponent<Collider>().enabled = true;
+        this.GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    public void Complete(float time)
+    {
+        Debug.Log("Completed quest in " + time);
+        EnableQuest();
+        if (time < bestTime)
+        {
+            bestTime = time;
+            bestScoreText.text = this.name + " - Best time: " + Stopwatch.formatTime(bestTime);
+        }
     }
 }

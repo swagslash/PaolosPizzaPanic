@@ -39,7 +39,8 @@ public class PlayerCarScript : MonoBehaviour
             var quest = other.gameObject.GetComponent<Quest>();
             
             activeQuest = quest;
-            foreach (var goal in quest.ActivateQuest(stopwatchComponent))
+            var newGoals = quest.ActivateQuest(stopwatchComponent);
+            foreach (var goal in newGoals)
             {
                 targets.Add(goal.transform.position);
             }
@@ -54,7 +55,7 @@ public class PlayerCarScript : MonoBehaviour
             if (targets.Count == 0)
             {
                 // Reset active quest
-                activeQuest.Complete();
+                activeQuest.Complete(stopwatchComponent.time);
                 activeQuest = null;
                 stopwatchComponent.StopWatchStop();
             }

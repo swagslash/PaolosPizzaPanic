@@ -5,10 +5,5 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     [HideInInspector]
-    public Goal nextGoal;
-
-    public bool isEndGoal()
-    {
-        return nextGoal == null;
-    }
+    public string name;
 }
