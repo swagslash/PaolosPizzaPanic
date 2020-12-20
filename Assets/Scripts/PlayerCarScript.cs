@@ -74,6 +74,9 @@ public class PlayerCarScript : MonoBehaviour
 
     public void resetPosition()
     {
+        var rigidbody = this.GetComponent<Rigidbody>();
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
         var transform1 = transform;
         transform1.rotation = Quaternion.identity;
         transform1.position += new Vector3(0,1,0);
