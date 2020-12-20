@@ -9,9 +9,10 @@ public class PathScript : MonoBehaviour
      */
     public List<Vector3> Waypoints = new List<Vector3>();
 
+    public int StartWayPointIndex = 0;
     public float Speed;
     public float TurningSpeed;
-
+    
     // Index for the next waypoint
     private int _nextWaypointIndex;
     
@@ -22,7 +23,9 @@ public class PathScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = Waypoints[0];
+        transform.position = Waypoints[StartWayPointIndex];
+        _nextWaypointIndex = (StartWayPointIndex + 1) % Waypoints.Count;
+        _direction = (Waypoints[_nextWaypointIndex] - transform.position).normalized;
     }
 
     // Update is called once per frame
@@ -44,9 +47,12 @@ public class PathScript : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
 
-        foreach (var waypoint in Waypoints)
+        for (var i = 0; i < Waypoints.Count; i++)
         {
-            Gizmos.DrawSphere(waypoint, 0.1f);
+            var current = Waypoints[i];
+            var next = Waypoints[(i + 1) % Waypoints.Count];
+            
+            Gizmos.DrawLine(current, next);
         }
     }
 }
