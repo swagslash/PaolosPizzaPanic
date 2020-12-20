@@ -188,8 +188,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.3
   m_SuspensionSpring:
-    spring: 42476.836
-    damper: 6796.294
+    spring: 42476.844
+    damper: 6796.2944
     targetPosition: 0.5
   m_SuspensionDistance: 0.1962
   m_ForceAppPointDistance: 0.54139006
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 38557032211880040}
-  targets:
-  - {fileID: 0}
+  resetRate: 5
+  stopwatchComponent: {fileID: 0}
 --- !u!1 &1052512859313769316
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +494,7 @@ WheelCollider:
     damper: 9199.678
     targetPosition: 0.5
   m_SuspensionDistance: 0.19620003
-  m_ForceAppPointDistance: 0.5703901
+  m_ForceAppPointDistance: 0.57039005
   m_Mass: 20
   m_WheelDampingRate: 0.25
   m_ForwardFriction:
@@ -617,7 +617,7 @@ WheelCollider:
     spring: 37577.156
     damper: 6012.345
     targetPosition: 0.5
-  m_SuspensionDistance: 0.19620001
+  m_SuspensionDistance: 0.19620003
   m_ForceAppPointDistance: 0.5623901
   m_Mass: 20
   m_WheelDampingRate: 0.25

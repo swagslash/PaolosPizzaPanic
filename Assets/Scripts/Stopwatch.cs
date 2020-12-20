@@ -8,15 +8,7 @@ public class Stopwatch : MonoBehaviour
 {
     public TextMeshProUGUI guiText;
     public float time;
-    float msec;
-    float sec;
-    float min;
-
-    public void Start()
-    {
-        // StopWatchStart();
-    }
-
+    
     public void OnDestroy()
     {
         StopAllCoroutines();
@@ -41,13 +33,18 @@ public class Stopwatch : MonoBehaviour
         while(true)
         {
             time += Time.deltaTime;
-            msec = (int)((time - (int)time) * 100);
-            sec = (int)(time % 60);
-            min = (int)(time / 60 % 60);
-
-            guiText.text = string.Format("{0:00}:{1:00}:{2:00}",min,sec,msec);
+            guiText.text = formatTime(time);
 
             yield return null;
         }
+    }
+
+    public static string formatTime(float time)
+    {
+        var msec = (int)((time - (int)time) * 100);
+        var sec = (int)(time % 60);
+        var min = (int)(time / 60 % 60);
+
+        return string.Format("{0:00}:{1:00}:{2:00}",min,sec,msec);
     }
 }
